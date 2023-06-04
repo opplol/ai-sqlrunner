@@ -1,2 +1,25 @@
 # ai-sqlrunner
-SQL Runner powered AI
+ai-sqlrunnerは、OpenAIのGPT-4を用いて自然言語でのSQLコマンド実行を可能にするStreamlitアプリケーションです。
+本アプリケーションは、実行用途して作成したものです。
+実際SQL（DDL、DML、DCL）の実行されます。またその結果がGPTに送信される処理されるので
+機密情報が含むDBでの利用は控えることをおすすめします。
+
+# Usage
+1. git clone
+    ```
+    git clone git@github.com:opplol/ai-sqlrunner.git
+    ```
+2. input your api key in docker-compose.yml
+    ```
+        environment:
+          - OPENAI_API_KEY={your openai api key}
+    ```
+3. docker compose up
+    ```
+    docker-compose up -d
+    ```
+4. access
+    ```
+    http://localhost:8501
+    ```
+

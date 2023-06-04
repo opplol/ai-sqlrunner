@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  langchain:
+    build:
+      context: .
+    tty: true
+    ports:
+      - 8501:8501
+    volumes:
+      - .:/app
+    environment:
+      - OPENAI_API_KEY={your openai api key}
+    command: streamlit run /app/ai_sql.py
+  lanchain_db:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: docker/db/Dockerfile
+    volumes:
+      - ./docker/db/initial:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: lanchain_test
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - 3309:3306
+
+volumes:
+  langchain-db-data:
